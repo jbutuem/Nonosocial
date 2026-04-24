@@ -34,8 +34,27 @@
   .wrap{max-width:1240px;margin:0 auto;padding:80px 40px}
   @media (max-width:768px){.wrap{padding:48px 22px}}
 
+  /* ============ LOGO ============ */
+  .brand-logo{display:block;margin:0 auto;max-width:100%;height:auto}
+  .brand-logo.lg{width:180px}
+  .brand-logo.md{width:120px}
+  .brand-logo.sm{width:64px;display:inline-block;vertical-align:middle;margin-right:14px}
+
+  .watermark-wrap{position:relative;overflow:hidden}
+  .watermark{
+    position:absolute;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%) rotate(-8deg);
+    width:580px;
+    opacity:.05;
+    z-index:0;
+    pointer-events:none;
+  }
+  .watermark-wrap > *{position:relative;z-index:1}
+
   /* ============ ABERTURA ============ */
   .opening{text-align:center;padding:60px 0 100px;position:relative}
+  .opening .brand-logo{margin-bottom:36px}
   .opening .stamp-date{
     font-family:'Special Elite',monospace;
     font-size:13px;letter-spacing:.28em;color:var(--vinho);
@@ -351,6 +370,7 @@
 
   <!-- ABERTURA -->
   <section class="opening">
+    <img src="logo-completo.png" alt="Empório do Nono" class="brand-logo lg">
     <div class="stamp-date">— Semana de 28 Abr a 04 Mai · 2026 —</div>
     <h1>A casa,<br>essa <em>semana</em>.</h1>
     <p class="lead">Quatro posts no feed. Onze stories ao longo dos dias. Um Nhoque da Fortuna na quarta. Tudo pensado pra cada dia ter seu próprio ritmo — sem encher, sem forçar, sem perder o tom da casa.</p>
@@ -424,7 +444,8 @@
   <div class="losango-band"></div>
 
   <!-- INTRO RESUMO -->
-  <section class="intro-resumo">
+  <section class="intro-resumo watermark-wrap">
+    <img src="logo-completo.png" alt="" class="watermark">
     <div class="head">— Os 4 posts da semana —</div>
     <h2>O que a casa vai <em>contar</em>.</h2>
 
@@ -458,7 +479,8 @@
   <div class="ornament">— ★ —</div>
 
   <!-- ASSETS PRONTOS -->
-  <section class="assets-section">
+  <section class="assets-section watermark-wrap">
+    <img src="logo-completo.png" alt="" class="watermark" style="opacity:.04;filter:invert(1)">
     <div class="hint">— Assets renderizados —</div>
     <h2>Prontos<br>pra <em>postar</em>.</h2>
     <p class="desc">18 arquivos finalizados nas dimensões corretas, com tipografia Playfair Display + Libre Caslon + Archivo + Special Elite (oficiais do brand book) e a paleta da casa aplicada.</p>
@@ -736,6 +758,7 @@ R$ 69 · Almoço de segunda a domingo
 
   <!-- FOOTER -->
   <footer class="footer">
+    <img src="logo-completo.png" alt="Empório do Nono" class="brand-logo md" style="margin-bottom:24px">
     <div class="signature">A casa da gente, em <em>Barão Geraldo</em>.</div>
     <div class="ornament-small">·   ·   ·</div>
     <div class="meta">
