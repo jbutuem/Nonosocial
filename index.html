@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Empório do Nono · Kit Semana 28/04 → 04/05 · v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Archivo:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --chopp:#F2B705;
+    --chopp-dark:#D99507;
+    --azul:#1E5A8A;
+    --azul-deep:#0F3554;
+    --azul-logo:#C7EAFB;
+    --vermelho-logo:#ED3237;
+    --vinho:#8B2635;
+    --creme:#F5EFE0;
+    --creme-2:#EBE3CC;
+    --carvao:#1A1815;
+    --tinta:#2B2620;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--creme);
+    color:var(--tinta);
+    font-family:'Libre Caslon Text',Georgia,serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  .wrap{max-width:1240px;margin:0 auto;padding:80px 40px}
+  @media (max-width:768px){.wrap{padding:48px 22px}}
+
+  /* ============ ABERTURA ============ */
+  .opening{text-align:center;padding:60px 0 100px;position:relative}
+  .opening .stamp-date{
+    font-family:'Special Elite',monospace;
+    font-size:13px;letter-spacing:.28em;color:var(--vinho);
+    margin-bottom:32px;transform:rotate(-1.2deg);display:inline-block;
+  }
+  .opening h1{
+    font-family:'Playfair Display',serif;font-weight:900;
+    font-size:clamp(56px, 9vw, 110px);line-height:.95;
+    letter-spacing:-.025em;color:var(--carvao);margin-bottom:28px;
+  }
+  .opening h1 em{font-style:italic;font-weight:400;color:var(--vinho)}
+  .opening .lead{
+    font-family:'Playfair Display',serif;font-style:italic;
+    font-size:22px;color:var(--tinta);max-width:580px;
+    margin:0 auto;line-height:1.5;
+  }
+
+  /* Divisor ornamental */
+  .ornament{
+    text-align:center;margin:60px 0;color:var(--vinho);
+    font-family:'Playfair Display',serif;font-size:24px;
+    letter-spacing:.6em;opacity:.7;
+  }
+  .ornament-small{
+    text-align:center;margin:24px 0;color:var(--vinho);
+    font-size:18px;letter-spacing:.4em;opacity:.6;
+  }
+
+  /* ============ CALENDÁRIO VISUAL ============ */
+  .calendar-section{margin:80px auto;max-width:1180px}
+  .calendar-section .label{
+    text-align:center;font-family:'Special Elite',monospace;
+    font-size:13px;letter-spacing:.32em;color:var(--vinho);
+    margin-bottom:14px;text-transform:uppercase;
+  }
+  .calendar-section h2{
+    text-align:center;font-family:'Playfair Display',serif;
+    font-weight:900;font-size:48px;color:var(--carvao);
+    margin-bottom:8px;letter-spacing:-.015em;
+  }
+  .calendar-section h2 em{font-style:italic;color:var(--vinho);font-weight:400}
+  .calendar-section .sub{
+    text-align:center;font-family:'Playfair Display',serif;
+    font-style:italic;font-size:18px;color:var(--tinta);
+    margin-bottom:60px;opacity:.8;
+  }
+
+  .calendar{
+    display:grid;grid-template-columns:repeat(7, 1fr);gap:8px;
+    background:var(--creme-2);padding:14px;
+    box-shadow:0 24px 56px -20px rgba(26,24,21,.18);
+  }
+  @media (max-width:920px){
+    .calendar{grid-template-columns:repeat(7, minmax(120px, 1fr));overflow-x:auto;padding:10px}
+  }
+
+  .day-card{
+    background:var(--creme);padding:20px 16px 24px;
+    min-height:240px;display:flex;flex-direction:column;position:relative;
+    transition:transform .2s ease;
+  }
+  .day-card:hover{transform:translateY(-3px)}
+  .day-card.is-post{background:var(--carvao);color:var(--creme)}
+  .day-card.is-event{background:var(--vinho);color:var(--creme)}
+  .day-card.is-empty{background:var(--creme-2);opacity:.55}
+
+  .day-card .dow{
+    font-family:'Special Elite',monospace;font-size:10px;
+    letter-spacing:.3em;text-transform:uppercase;margin-bottom:6px;opacity:.7;
+  }
+  .day-card .dnum{
+    font-family:'Playfair Display',serif;font-weight:900;
+    font-size:42px;line-height:1;margin-bottom:14px;
+  }
+  .day-card.is-post .dnum,
+  .day-card.is-event .dnum{color:var(--chopp)}
+
+  .day-card .marker{
+    font-family:'Archivo',sans-serif;font-weight:700;font-size:9px;
+    letter-spacing:.22em;text-transform:uppercase;
+    padding:4px 8px;align-self:flex-start;margin-bottom:10px;
+  }
+  .day-card.is-post .marker{background:var(--chopp);color:var(--carvao)}
+  .day-card.is-event .marker{background:var(--chopp);color:var(--carvao)}
+  .day-card.is-stories-only .marker{background:var(--azul);color:var(--creme)}
+  .day-card.is-empty .marker{display:none}
+
+  .day-card .ttl{
+    font-family:'Playfair Display',serif;font-weight:700;
+    font-size:15px;line-height:1.25;margin-bottom:10px;
+  }
+  .day-card .ttl em{font-style:italic}
+  .day-card .time{
+    margin-top:auto;font-family:'Special Elite',monospace;
+    font-size:11px;letter-spacing:.12em;opacity:.85;
+  }
+  .day-card .empty-msg{
+    margin-top:auto;font-family:'Libre Caslon Text',serif;
+    font-style:italic;font-size:12px;color:var(--tinta);opacity:.7;
+  }
+
+  .calendar-legend{
+    display:flex;justify-content:center;gap:36px;margin-top:24px;
+    flex-wrap:wrap;font-family:'Archivo',sans-serif;font-size:11px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--tinta);
+  }
+  .calendar-legend .li{display:flex;align-items:center;gap:8px}
+  .calendar-legend .sw{width:14px;height:14px;display:inline-block}
+  .calendar-legend .sw.post{background:var(--carvao)}
+  .calendar-legend .sw.event{background:var(--vinho)}
+  .calendar-legend .sw.stories{background:var(--azul)}
+  .calendar-legend .sw.empty{background:var(--creme-2);border:1px solid #ccc}
+
+  /* ============ LOSANGO BAND ============ */
+  .losango-band{
+    height:50px;margin:60px -40px;background-color:#FEFEFE;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><polygon points='50,0 100,50 50,100 0,50' fill='%23C7EAFB'/></svg>");
+    background-size:50px 50px;
+    border-top:3px solid var(--chopp);border-bottom:3px solid var(--chopp);
+  }
+  @media (max-width:768px){.losango-band{margin:48px -22px;height:40px;background-size:40px 40px}}
+
+  /* ============ INTRO RESUMO ============ */
+  .intro-resumo{padding:64px 0 32px;border-top:1px solid var(--carvao);margin-top:80px}
+  .intro-resumo .head{
+    font-family:'Special Elite',monospace;font-size:13px;
+    letter-spacing:.3em;color:var(--vinho);text-align:center;
+    margin-bottom:14px;text-transform:uppercase;
+  }
+  .intro-resumo h2{
+    font-family:'Playfair Display',serif;font-weight:900;
+    font-size:48px;color:var(--carvao);text-align:center;
+    margin-bottom:48px;letter-spacing:-.015em;
+  }
+  .intro-resumo h2 em{font-style:italic;color:var(--vinho);font-weight:400}
+
+  .pillars{display:grid;grid-template-columns:repeat(4, 1fr);gap:20px;margin-top:36px}
+  @media (max-width:820px){.pillars{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:480px){.pillars{grid-template-columns:1fr}}
+  .pillar{padding:28px 24px;background:#fff;transition:transform .2s ease}
+  .pillar:hover{transform:translateY(-2px)}
+  .pillar .p-day{
+    font-family:'Special Elite',monospace;font-size:11px;
+    letter-spacing:.2em;color:var(--vinho);margin-bottom:8px;text-transform:uppercase;
+  }
+  .pillar h4{
+    font-family:'Playfair Display',serif;font-weight:700;font-size:24px;
+    color:var(--carvao);margin-bottom:14px;line-height:1.15;
+  }
+  .pillar h4 em{font-style:italic;color:var(--vinho)}
+  .pillar p{font-size:14.5px;line-height:1.55;color:var(--tinta)}
+
+  /* ============ ASSETS PRONTOS ============ */
+  .assets-section{margin:120px 0;padding:64px 56px;background:var(--carvao);color:var(--creme);position:relative}
+  .assets-section::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:4px;
+    background:linear-gradient(90deg,var(--chopp) 0%,var(--vinho) 100%);
+  }
+  .assets-section .hint{
+    font-family:'Special Elite',monospace;font-size:12px;
+    letter-spacing:.3em;color:var(--chopp);margin-bottom:14px;text-transform:uppercase;
+  }
+  .assets-section h2{
+    font-family:'Playfair Display',serif;font-weight:900;
+    font-size:54px;line-height:1.05;letter-spacing:-.015em;
+    color:var(--creme);margin-bottom:18px;
+  }
+  .assets-section h2 em{font-style:italic;color:var(--chopp);font-weight:400}
+  .assets-section .desc{
+    font-family:'Libre Caslon Text',serif;font-size:17px;line-height:1.6;
+    max-width:640px;opacity:.85;margin-bottom:56px;
+  }
+
+  .group{margin-bottom:56px}
+  .group:last-child{margin-bottom:0}
+  .group-head{
+    display:flex;justify-content:space-between;align-items:baseline;
+    border-bottom:1px solid rgba(242,183,5,.25);padding-bottom:14px;
+    margin-bottom:32px;flex-wrap:wrap;gap:14px;
+  }
+  .group-head h3{font-family:'Playfair Display',serif;font-weight:700;font-size:28px;color:var(--chopp)}
+  .group-head h3 em{font-style:italic;font-weight:400}
+  .group-head .meta{
+    font-family:'Archivo',sans-serif;font-weight:700;font-size:11px;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--creme);opacity:.55;
+  }
+
+  .grid-feed{display:grid;grid-template-columns:repeat(4, 1fr);gap:18px}
+  .grid-carrossel{display:grid;grid-template-columns:repeat(3, 1fr);gap:18px}
+  .grid-stories{display:grid;grid-template-columns:repeat(4, 1fr);gap:14px}
+  @media (max-width:920px){
+    .grid-feed,.grid-carrossel{grid-template-columns:repeat(2,1fr)}
+    .grid-stories{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:480px){.grid-feed,.grid-carrossel,.grid-stories{grid-template-columns:1fr}}
+
+  .asset{background:rgba(245,239,224,.04);padding:14px;transition:background .2s ease}
+  .asset:hover{background:rgba(245,239,224,.08)}
+  .asset img{width:100%;height:auto;display:block;box-shadow:0 12px 28px rgba(0,0,0,.45)}
+  .asset .lbl{
+    margin-top:14px;font-family:'Archivo',sans-serif;font-size:10px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--chopp);
+    display:flex;justify-content:space-between;
+  }
+  .asset .lbl .fname{color:var(--creme);opacity:.6;font-weight:400}
+
+  /* ============ POST DETALHE ============ */
+  .post-detail{margin:120px 0 0;position:relative}
+  .post-detail .day-mark{text-align:center;margin-bottom:24px}
+  .post-detail .day-mark .stamp{
+    display:inline-block;font-family:'Special Elite',monospace;
+    font-size:13px;letter-spacing:.28em;color:var(--vinho);
+    border:2px solid var(--vinho);padding:10px 20px;transform:rotate(-1deg);
+  }
+  .post-detail .day-mark.alt .stamp{transform:rotate(.8deg)}
+
+  .post-detail h2{
+    text-align:center;font-family:'Playfair Display',serif;
+    font-weight:900;font-size:62px;color:var(--carvao);
+    line-height:1;letter-spacing:-.02em;margin-bottom:14px;
+  }
+  .post-detail h2 em{font-style:italic;color:var(--vinho);font-weight:400}
+  .post-detail .when{
+    text-align:center;font-family:'Playfair Display',serif;
+    font-style:italic;font-size:19px;color:var(--tinta);
+    opacity:.75;margin-bottom:60px;
+  }
+
+  .post-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:start}
+  @media (max-width:920px){.post-grid{grid-template-columns:1fr;gap:36px}}
+
+  .post-img{box-shadow:0 28px 56px -16px rgba(26,24,21,.25)}
+  .post-img img{width:100%;height:auto;display:block}
+
+  .post-body .lead{
+    font-family:'Playfair Display',serif;font-style:italic;
+    font-size:22px;line-height:1.4;color:var(--tinta);
+    padding-left:24px;border-left:3px solid var(--chopp);margin-bottom:36px;
+  }
+
+  .leg-card{
+    background:#fff;padding:32px 36px;margin-bottom:24px;
+    box-shadow:0 12px 32px -12px rgba(26,24,21,.12);position:relative;
+  }
+  .leg-card::before{
+    content:"";position:absolute;top:0;left:0;width:6px;height:100%;background:var(--chopp);
+  }
+  .leg-card .lh{
+    font-family:'Special Elite',monospace;font-size:11px;
+    letter-spacing:.24em;color:var(--vinho);text-transform:uppercase;
+    margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;
+  }
+  .leg-card .lh small{font-size:10px;opacity:.55;font-weight:400}
+  .leg-card .txt{
+    font-family:'Libre Caslon Text',serif;font-size:16px;
+    line-height:1.75;color:var(--tinta);white-space:pre-wrap;
+  }
+  .leg-card .tags{
+    margin-top:18px;padding-top:16px;
+    border-top:1px dashed rgba(139,38,53,.25);
+    font-family:'Archivo',sans-serif;font-size:13px;
+    color:var(--azul);letter-spacing:.02em;
+  }
+
+  .notes{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:8px}
+  @media (max-width:560px){.notes{grid-template-columns:1fr}}
+  .note .ttl{
+    font-family:'Special Elite',monospace;font-size:11px;
+    letter-spacing:.22em;text-transform:uppercase;margin-bottom:12px;
+  }
+  .note.ok .ttl{color:var(--azul)}
+  .note.no .ttl{color:var(--vinho)}
+  .note ul{list-style:none;padding-left:0}
+  .note li{
+    font-family:'Libre Caslon Text',serif;font-size:14px;
+    line-height:1.55;padding-left:20px;position:relative;margin-bottom:8px;
+  }
+  .note.ok li::before{content:"❦";position:absolute;left:2px;color:var(--azul);font-size:13px;top:0}
+  .note.no li::before{content:"✕";position:absolute;left:2px;color:var(--vinho);font-size:11px;top:2px}
+
+  .carousel-preview{margin-top:48px;padding-top:36px;border-top:1px solid var(--creme-2)}
+  .carousel-preview .lbl{
+    font-family:'Special Elite',monospace;font-size:11px;
+    letter-spacing:.24em;color:var(--vinho);margin-bottom:18px;text-transform:uppercase;
+  }
+  .carousel-row{display:grid;grid-template-columns:repeat(3, 1fr);gap:14px}
+  .carousel-row .slide{box-shadow:0 8px 20px -8px rgba(26,24,21,.15)}
+  .carousel-row .slide img{width:100%;height:auto;display:block}
+  .carousel-row .slide .num{
+    font-family:'Special Elite',monospace;font-size:10px;
+    letter-spacing:.22em;color:var(--vinho);margin-top:8px;
+  }
+
+  /* ============ FOOTER ============ */
+  .footer{
+    margin-top:140px;padding:48px 0 32px;
+    border-top:2px solid var(--carvao);text-align:center;
+  }
+  .footer .signature{
+    font-family:'Playfair Display',serif;font-style:italic;
+    font-size:32px;color:var(--carvao);margin-bottom:14px;
+  }
+  .footer .signature em{color:var(--vinho)}
+  .footer .meta{
+    font-family:'Special Elite',monospace;font-size:12px;
+    letter-spacing:.18em;color:var(--tinta);opacity:.7;margin-top:18px;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- ABERTURA -->
+  <section class="opening">
+    <div class="stamp-date">— Semana de 28 Abr a 04 Mai · 2026 —</div>
+    <h1>A casa,<br>essa <em>semana</em>.</h1>
+    <p class="lead">Quatro posts no feed. Onze stories ao longo dos dias. Um Nhoque da Fortuna na quarta. Tudo pensado pra cada dia ter seu próprio ritmo — sem encher, sem forçar, sem perder o tom da casa.</p>
+  </section>
+
+  <div class="ornament">❦   ❦   ❦</div>
+
+  <!-- CALENDÁRIO -->
+  <section class="calendar-section">
+    <div class="label">— A semana, dia a dia —</div>
+    <h2>Calendário <em>da semana</em>.</h2>
+    <p class="sub">Quatro posts (preto / vinho), três dias só de stories (azul), um dia de respiro.</p>
+
+    <div class="calendar">
+      <div class="day-card is-stories-only">
+        <div class="dow">TER</div><div class="dnum">28</div>
+        <div class="marker">Stories</div>
+        <div class="ttl">Calendário<br>da <em>semana</em></div>
+        <div class="time">18h</div>
+      </div>
+
+      <div class="day-card is-event">
+        <div class="dow">QUA</div><div class="dnum">29</div>
+        <div class="marker">Post + Stories</div>
+        <div class="ttl">Nhoque da<br><em>Fortuna</em></div>
+        <div class="time">11h · feed</div>
+      </div>
+
+      <div class="day-card is-stories-only">
+        <div class="dow">QUI</div><div class="dnum">30</div>
+        <div class="marker">Stories</div>
+        <div class="ttl">Warmup<br>fim de semana</div>
+        <div class="time">18h</div>
+      </div>
+
+      <div class="day-card is-empty">
+        <div class="dow">SEX</div><div class="dnum">01</div>
+        <div class="empty-msg">Feriado · respiro</div>
+      </div>
+
+      <div class="day-card is-post">
+        <div class="dow">SEX</div><div class="dnum">02</div>
+        <div class="marker">Post + Stories</div>
+        <div class="ttl">Trio do <em>Nono</em></div>
+        <div class="time">17h30 · feed</div>
+      </div>
+
+      <div class="day-card is-post">
+        <div class="dow">SÁB</div><div class="dnum">03</div>
+        <div class="marker">Carrossel + Stories</div>
+        <div class="ttl"><em>Acepipes</em><br>monta o seu</div>
+        <div class="time">16h · feed</div>
+      </div>
+
+      <div class="day-card is-post">
+        <div class="dow">DOM</div><div class="dnum">04</div>
+        <div class="marker">Post + Stories</div>
+        <div class="ttl">PF do <em>Nono</em></div>
+        <div class="time">10h30 · feed</div>
+      </div>
+    </div>
+
+    <div class="calendar-legend">
+      <div class="li"><span class="sw post"></span> Post no feed</div>
+      <div class="li"><span class="sw event"></span> Evento da casa</div>
+      <div class="li"><span class="sw stories"></span> Só stories</div>
+      <div class="li"><span class="sw empty"></span> Sem postagem</div>
+    </div>
+  </section>
+
+  <div class="losango-band"></div>
+
+  <!-- INTRO RESUMO -->
+  <section class="intro-resumo">
+    <div class="head">— Os 4 posts da semana —</div>
+    <h2>O que a casa vai <em>contar</em>.</h2>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="p-day">Quarta · 29 Abr</div>
+        <h4>Nhoque da<br><em>Fortuna</em></h4>
+        <p>O evento mensal que toda casa italiana faz. A cédula embaixo do prato pra dar sorte no mês. Foto cinematográfica, post no feed pra construir memória.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="p-day">Sexta · 02 Mai</div>
+        <h4>Trio do <em>Nono</em></h4>
+        <p>Combo pronto da forneria — croquete, bolinho, e mais um. Sexta começa com o que a casa já preparou pra você. Chopp do lado, sem pressa.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="p-day">Sábado · 03 Mai</div>
+        <h4><em>Acepipes</em></h4>
+        <p>Carrossel de 3 slides. "A tábua é sua." Cliente escolhe o que quiser do balcão frio + cozinha. A gente monta e leva.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="p-day">Domingo · 04 Mai</div>
+        <h4>PF do <em>Nono</em></h4>
+        <p>O prato que serve todo dia. Mas domingo, convenhamos, combina mais. A receita não muda desde 99. Porque não precisa.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament">— ★ —</div>
+
+  <!-- ASSETS PRONTOS -->
+  <section class="assets-section">
+    <div class="hint">— Assets renderizados —</div>
+    <h2>Prontos<br>pra <em>postar</em>.</h2>
+    <p class="desc">18 arquivos finalizados nas dimensões corretas, com tipografia Playfair Display + Libre Caslon + Archivo + Special Elite (oficiais do brand book) e a paleta da casa aplicada.</p>
+
+    <div class="group">
+      <div class="group-head">
+        <h3>Feed · <em>4 posts</em></h3>
+        <div class="meta">1080 × 1350 · proporção 4:5</div>
+      </div>
+      <div class="grid-feed">
+        <div class="asset">
+          <img src="feed/post-04-qua-nhoque-fortuna.jpg" alt="Post Nhoque">
+          <div class="lbl"><span>Qua 29 · 11h</span><span class="fname">post-04</span></div>
+        </div>
+        <div class="asset">
+          <img src="feed/post-01-sex-trio-do-nono.jpg" alt="Post Trio">
+          <div class="lbl"><span>Sex 02 · 17h30</span><span class="fname">post-01</span></div>
+        </div>
+        <div class="asset">
+          <img src="feed/post-02-sab-acepipes-capa.jpg" alt="Post Acepipes">
+          <div class="lbl"><span>Sáb 03 · 16h</span><span class="fname">post-02</span></div>
+        </div>
+        <div class="asset">
+          <img src="feed/post-03-dom-pf-do-nono.jpg" alt="Post PF">
+          <div class="lbl"><span>Dom 04 · 10h30</span><span class="fname">post-03</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-head">
+        <h3>Carrossel · <em>3 slides</em></h3>
+        <div class="meta">1080 × 1080 · sábado 03/05</div>
+      </div>
+      <div class="grid-carrossel">
+        <div class="asset">
+          <img src="carrossel/slide-01-capa.jpg" alt="">
+          <div class="lbl"><span>1 · capa</span><span class="fname">slide-01</span></div>
+        </div>
+        <div class="asset">
+          <img src="carrossel/slide-02-balcao-frio.jpg" alt="">
+          <div class="lbl"><span>2 · balcão</span><span class="fname">slide-02</span></div>
+        </div>
+        <div class="asset">
+          <img src="carrossel/slide-03-pernil-forno.jpg" alt="">
+          <div class="lbl"><span>3 · pernil</span><span class="fname">slide-03</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-head">
+        <h3>Stories · <em>11 peças</em></h3>
+        <div class="meta">1080 × 1920 · ao longo da semana</div>
+      </div>
+      <div class="grid-stories">
+        <div class="asset"><img src="stories/story-01-sex-abertura.jpg" alt=""><div class="lbl"><span>01 · abertura</span><span class="fname">sex 02</span></div></div>
+        <div class="asset"><img src="stories/story-02-sex-trio.jpg" alt=""><div class="lbl"><span>02 · trio</span><span class="fname">sex 02</span></div></div>
+        <div class="asset"><img src="stories/story-03-sex-enquete.jpg" alt=""><div class="lbl"><span>03 · enquete</span><span class="fname">sex 02</span></div></div>
+        <div class="asset"><img src="stories/story-04-sab-abertura.jpg" alt=""><div class="lbl"><span>04 · abertura</span><span class="fname">sáb 03</span></div></div>
+        <div class="asset"><img src="stories/story-05-sab-cardapio.jpg" alt=""><div class="lbl"><span>05 · cardápio</span><span class="fname">sáb 03</span></div></div>
+        <div class="asset"><img src="stories/story-06-sab-caixinha.jpg" alt=""><div class="lbl"><span>06 · caixinha</span><span class="fname">sáb 03</span></div></div>
+        <div class="asset"><img src="stories/story-07-dom-pf.jpg" alt=""><div class="lbl"><span>07 · PF</span><span class="fname">dom 04</span></div></div>
+        <div class="asset"><img src="stories/story-08-dom-manifesto.jpg" alt=""><div class="lbl"><span>08 · manifesto</span><span class="fname">dom 04</span></div></div>
+        <div class="asset"><img src="stories/story-09-seg-aviso.jpg" alt=""><div class="lbl"><span>09 · aviso</span><span class="fname">ter 28</span></div></div>
+        <div class="asset"><img src="stories/story-10-seg-foto-nhoque.jpg" alt=""><div class="lbl"><span>10 · nhoque</span><span class="fname">qua 29</span></div></div>
+        <div class="asset"><img src="stories/story-11-seg-tradicao.jpg" alt=""><div class="lbl"><span>11 · tradição</span><span class="fname">qua 29</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament">❦   ❦   ❦</div>
+
+  <!-- POST 04: NHOQUE -->
+  <section class="post-detail">
+    <div class="day-mark"><span class="stamp">QUA · 29 ABR · 11H</span></div>
+    <h2>Nhoque da <em>Fortuna</em>.</h2>
+    <p class="when">Post de feed · tradição mensal</p>
+
+    <div class="post-grid">
+      <div class="post-img"><img src="feed/post-04-qua-nhoque-fortuna.jpg" alt=""></div>
+      <div class="post-body">
+        <p class="lead">Toda casa italiana respeita o dia 29. A casa da gente também — desde sempre.</p>
+
+        <div class="leg-card">
+          <div class="lh">Legenda <small>~ 320 caracteres</small></div>
+          <div class="txt">Hoje é dia de Nhoque da Fortuna na casa.
+
+A tradição manda: cédula embaixo do prato antes do primeiro bocado, pra atrair fartura no mês que vem. A gente serve o nhoque com sugo de carne, prepara a cena como sempre — o resto fica com você.
+
+Almoço e jantar · 29 de abril
+Reserva pelo (19) 3289-0041</div>
+          <div class="tags">#emporiodonono #nhoquedafortuna #tradicaoitaliana #baraogeraldo #campinas #dia29</div>
+        </div>
+
+        <div class="notes">
+          <div class="note ok">
+            <div class="ttl">Faz sentido porque</div>
+            <ul>
+              <li>"A casa da gente também" — pertencimento</li>
+              <li>Tradição como argumento, sem explicar demais</li>
+              <li>"O resto fica com você" — convite respeitoso</li>
+              <li>CTA prática (telefone) sem grito</li>
+            </ul>
+          </div>
+          <div class="note no">
+            <div class="ttl">Evitar</div>
+            <ul>
+              <li>"Reserve já! Vagas limitadas!"</li>
+              <li>Explicar a origem italiana academicamente</li>
+              <li>Emoji de massa / dinheiro / sorte</li>
+              <li>"Tradição milenar imperdível"</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament-small">·   ·   ·</div>
+
+  <!-- POST 01: TRIO -->
+  <section class="post-detail">
+    <div class="day-mark alt"><span class="stamp">SEX · 02 MAI · 17H30</span></div>
+    <h2>Trio do <em>Nono</em>.</h2>
+    <p class="when">Post de feed · combo pronto da forneria</p>
+
+    <div class="post-grid">
+      <div class="post-img"><img src="feed/post-01-sex-trio-do-nono.jpg" alt=""></div>
+      <div class="post-body">
+        <p class="lead">Croquete de cupim, bolinho de bacalhau, bolinho da Vó Ita. Molho da casa no meio. Três pra começar — ou pra dividir, se sobrar vontade.</p>
+
+        <div class="leg-card">
+          <div class="lh">Legenda <small>~ 290 caracteres</small></div>
+          <div class="txt">Sexta começa melhor com o Trio do Nono.
+
+Croquete de cupim, bolinho de bacalhau, bolinho da Vó Ita — fritos na hora, molho da casa pra acompanhar. A gente juntou os três que mais saem porque funciona assim mesmo: um de cada, chopp do lado, e pronto.
+
+Todo dia · Forneria a partir das 18h
+Barão Geraldo · (19) 3289-0041</div>
+          <div class="tags">#emporiodonono #triodonono #baraogeraldo #petiscoemcampinas #chopp #bardeesquina</div>
+        </div>
+
+        <div class="notes">
+          <div class="note ok">
+            <div class="ttl">Faz sentido porque</div>
+            <ul>
+              <li>Nomeia os três bolinhos específicos</li>
+              <li>"A gente juntou os três que mais saem"</li>
+              <li>Chopp como combo natural</li>
+              <li>Horário da forneria (18h) prática</li>
+            </ul>
+          </div>
+          <div class="note no">
+            <div class="ttl">Evitar</div>
+            <ul>
+              <li>"Aperitivos artesanais exclusivos"</li>
+              <li>Listar preço no post — sobe nos stories</li>
+              <li>"Corre, sexta é hoje"</li>
+              <li>Emoji de cerveja ou chama no corpo</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament-small">·   ·   ·</div>
+
+  <!-- POST 02: ACEPIPES -->
+  <section class="post-detail">
+    <div class="day-mark"><span class="stamp">SÁB · 03 MAI · 16H</span></div>
+    <h2>Acepipes — <em>monta o seu</em>.</h2>
+    <p class="when">Carrossel de 3 slides · cliente escolhe</p>
+
+    <div class="post-grid">
+      <div class="post-img"><img src="feed/post-02-sab-acepipes-capa.jpg" alt=""></div>
+      <div class="post-body">
+        <p class="lead">Azeitona preta, verde graúda, muçarela de búfala, pernil temperado, berinjela, charuto, presunto cru. Escolhe o que combina com o seu sábado.</p>
+
+        <div class="leg-card">
+          <div class="lh">Legenda <small>~ 370 caracteres</small></div>
+          <div class="txt">No Nono, a tábua de acepipes é sua.
+
+No balcão frio tem azeitona preta, azeitona verde graúda, muçarela de búfala, pernil temperado, berinjela ao azeite, charuto de uva, presunto cru. Escolhe o que combina com o seu sábado — a gente monta a tábua e manda pra mesa.
+
+500g com 3 escolhas · 650g com 4.
+
+Sábado até 1h · (19) 3289-0041</div>
+          <div class="tags">#emporiodonono #acepipes #petiscoemcampinas #baraogeraldo #muçareladebúfala #tábuadefrios</div>
+        </div>
+
+        <div class="notes">
+          <div class="note ok">
+            <div class="ttl">Faz sentido porque</div>
+            <ul>
+              <li>"A tábua é sua" — virada de chave</li>
+              <li>Lista os acepipes pelo nome</li>
+              <li>Preço por gramatura (info útil)</li>
+              <li>Carrossel mostra o balcão real</li>
+            </ul>
+          </div>
+          <div class="note no">
+            <div class="ttl">Evitar</div>
+            <ul>
+              <li>"Tábua premium de charcutaria"</li>
+              <li>Usar a palavra "experiência"</li>
+              <li>Promoção no sábado (dia mais forte)</li>
+              <li>Foto stock de embutido</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-preview">
+      <div class="lbl">— Slides 2 e 3 — desliza pro lado —</div>
+      <div class="carousel-row">
+        <div class="slide"><img src="carrossel/slide-01-capa.jpg" alt=""><div class="num">SLIDE 1 · CAPA</div></div>
+        <div class="slide"><img src="carrossel/slide-02-balcao-frio.jpg" alt=""><div class="num">SLIDE 2 · BALCÃO</div></div>
+        <div class="slide"><img src="carrossel/slide-03-pernil-forno.jpg" alt=""><div class="num">SLIDE 3 · PERNIL</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament-small">·   ·   ·</div>
+
+  <!-- POST 03: PF -->
+  <section class="post-detail">
+    <div class="day-mark alt"><span class="stamp">DOM · 04 MAI · 10H30</span></div>
+    <h2>PF do <em>Nono</em>.</h2>
+    <p class="when">Post de feed · todo dia, mas combina mais</p>
+
+    <div class="post-grid">
+      <div class="post-img"><img src="feed/post-03-dom-pf-do-nono.jpg" alt=""></div>
+      <div class="post-body">
+        <p class="lead">Arroz, feijão preto, filé, farofa com banana da terra, ovo frito, tomate, cebola tirolesa. O prato da casa. Todo dia, do jeito que sempre foi.</p>
+
+        <div class="leg-card">
+          <div class="lh">Legenda <small>~ 340 caracteres</small></div>
+          <div class="txt">PF do Nono — o prato que não muda desde 99.
+
+Arroz, feijão preto, filé, farofa com banana da terra, ovo frito, tomate, cebola tirolesa. Serve todo dia no almoço — porque prato bom não precisa de dia marcado. Mas domingo, convenhamos, combina mais.
+
+R$ 69 · Almoço de segunda a domingo
+(19) 3289-0041 · Barão Geraldo</div>
+          <div class="tags">#emporiodonono #pfdonono #desde1999 #baraogeraldo #almocoemcampinas #comidacaseira</div>
+        </div>
+
+        <div class="notes">
+          <div class="note ok">
+            <div class="ttl">Faz sentido porque</div>
+            <ul>
+              <li>"Todo dia" como dado, não surpresa</li>
+              <li>"Domingo combina mais" — humor seco</li>
+              <li>Lista cada item do prato</li>
+              <li>R$ 69 visível — decisão prática</li>
+            </ul>
+          </div>
+          <div class="note no">
+            <div class="ttl">Evitar</div>
+            <ul>
+              <li>"Almoço especial de domingo"</li>
+              <li>"Tradição inesquecível"</li>
+              <li>Call para "reservar" — PF não reserva</li>
+              <li>Emoji de família / prato / sol</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="losango-band"></div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="signature">A casa da gente, em <em>Barão Geraldo</em>.</div>
+    <div class="ornament-small">·   ·   ·</div>
+    <div class="meta">
+      Empório do Nono · Desde 1999<br>
+      Kit Semana 28 Abr → 04 Mai 2026 · v3 · TGT Digital
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
